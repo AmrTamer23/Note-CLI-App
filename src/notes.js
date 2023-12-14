@@ -3,7 +3,7 @@ import { readDB, writeDB, insertDB } from "./db.js";
 export const addNote = async (note, tags) => {
   const newNote = {
     id: Date.now(),
-    content: note.content,
+    content: note,
     tags,
   };
   await insertDB(newNote);
@@ -29,9 +29,9 @@ export const removeNote = async (id) => {
   if (!match) {
     throw new Error(`Note with id ${id} not found`);
   } else {
-    const newNotes = notes.filter((note) => note.id !== id);
+    const newNotes = notes.filter((note) => note.id !== match.id);
     await writeDB({ notes: newNotes });
-    return newNotes;
+    return match.id;
   }
 };
 
