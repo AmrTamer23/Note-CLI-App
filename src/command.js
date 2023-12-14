@@ -1,5 +1,6 @@
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
+import { addNote } from "./notes.js";
 
 yargs(hideBin(process.argv))
   .command(
@@ -12,7 +13,8 @@ yargs(hideBin(process.argv))
       });
     },
     (argv) => {
-      console.log(argv.note);
+      const tags = argv.tags ? argv.tags.split(",") : [];
+      const note = addNote(argv.note, tags);
     }
   )
   .option("tags", {
