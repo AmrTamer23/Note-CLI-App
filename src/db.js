@@ -11,7 +11,7 @@ export async function writeDB(data) {
   await fs.writeFile(DB_PATH, JSON.stringify(data));
 }
 
-export async function addNote(note) {
+export async function insertDB(note) {
   const db = await readDB();
   db.notes.push(note);
   await writeDB(db);
